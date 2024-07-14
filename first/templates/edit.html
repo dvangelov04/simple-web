@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <h2><center>Edit Stock</center></h2>
+{% endblock title %}
+
+{% block content %}
+  {% if stocks.owner == user.request %}
+    <div>
+        <center><h2>{{ stock.name  }}</h2></center>
+    </div>
+    <form method='POST'>
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="exampleInputName" class="form-label">Stock name</label>
+          <input type="text" class="form-control" name= 'name' placeholder = "{{ stock.name  }}" id="exampleInputName" value = "{{ stock.name  }}">
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputNumber" class="form-label">Number of stocks bought</label>
+          <input type="Number" class="form-control" id="exampleInputNumber" name='number'>
+        </div>
+        <div class="mb-3">
+          <label for="exampleInputNumber" class="form-label">Price per stocks bought in $</label>
+          <input type="Number" step = 0.01 class="form-control" id="exampleInputNumber" name='price'>
+        </div>
+        <center><button type="submit" class="btn btn-primary">Update Stock</button></center>
+        <br>
+    </form>
+    {% else %}
+      <center><p>Access denied, authenticated user only!</p></center>
+    {% endif %}
+{% endblock content %}
+

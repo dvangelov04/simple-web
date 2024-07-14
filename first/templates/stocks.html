@@ -1,0 +1,73 @@
+
+{% extends "base.html" %}
+
+{% block title %}
+
+    <center><h2>Portfolio</h2></center>
+
+{% endblock title %}
+
+{% block content %}
+  {% if stocks.owner == user.request %}
+    <center><form method='POST' class = 'col-8'>
+        {% csrf_token %}
+        <div class="mb-3">
+          <label for="name" class="form-label">Stock name</label>
+          <input type="text" class="form-control" name= 'name' id="name">
+        </div>
+        <div class="mb-3">
+          <label for="number" class="form-label">Number of stocks bought</label>
+          <input type="Number" class="form-control" id="number" name='number'>
+        </div>
+        <div class="mb-3">
+          <label for="price" class="form-label">Price per stocks bought in $</label>
+          <input type="Number" step = 0.01 class="form-control" id="price" name='price'>
+        </div>
+        <center><button type="submit" class="btn btn-primary">Add Stock to Portfolio</button></center>
+      </form></center>
+      <hr>
+      <br>
+      <br>
+      <br>
+      
+      <center><h3> Stocks View </h4></center>
+    <table class="table col-6">
+        <thead>
+          <tr>
+            <th scope="col">Stock</th>
+            <th scope="col">Opened</th>
+            <th scope="col">Closed</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th> 
+                {% for s in stocks %}
+                    <a href="{% url 'edit' s.id %}">  {{ s.name }} </a><hr>
+                {% endfor %}
+            </th>
+            <td>
+                {% for o in opened %}
+                    {{ o }} <hr>
+                {% endfor %}
+            </td>
+            <td>
+                {% for c in closed %}
+                    {{ c }} <hr>
+                {% endfor %}
+            </td>
+            
+          </tr>
+          
+        </tbody>
+      </table>
+  {% else %}
+    <center><p>Access denied, authenticated user only!</p></center>
+  {% endif %}
+{% endblock content %}
+
+
+
+
+
+

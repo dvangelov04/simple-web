@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+
+{% block title %}
+    <h2><center>Welcome home, {{ user.username }}!</center></h2>
+{% endblock title %}
+
+
+
+
+{% block content %}
+    <class = "container">
+        <br>
+        <br>
+        <h3><center>    Today's date: {{ date }}     </center></h3>
+            <hr>
+            <br>
+            <br>
+            <h4>
+            {% if stocks.owner == user.request %}
+                <center><p>Bought stocks: 
+                {% for s in stocks %}
+                    {{ s }} // 
+                {% endfor %} 
+                </center></p>
+                <hr>
+                <center><p>Yesterday's Winners: 
+                {% for w in winners %}
+                    {{ w }}
+                {% endfor %}
+                </center></p>
+                <center><p>Yesterday's Losers:
+                {% for l in losers %}
+                    {{ l }}
+                {% endfor %}
+                </center></p>
+                <br>
+                <hr>
+                <center><p>Total:{{ total }}</center></p>
+                </h4>
+            {% else %}
+                <center><p>Access denied, authenticated user only!</p></center>
+            {% endif %}
+            
+            
+
+{% endblock content %}
+
+        
+
+
+
